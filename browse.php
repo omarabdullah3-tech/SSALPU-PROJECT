@@ -1,19 +1,17 @@
 <?php
 session_start();
-require_once 'db_config.php';
+include 'db_config.php'; 
 
-// Fetch the most recent uploads from the database
-try {
-    $stmt = $pdo->query("
-        SELECT u.title, u.file_path, u.category, u.upload_date, us.full_name 
-        FROM uploads u 
-        JOIN users us ON u.user_id = us.id 
-        ORDER BY u.upload_date DESC 
-        LIMIT 20
-    ");
-    $recent_files = $stmt->fetchAll();
-} catch (PDOException $e) {
-    $recent_files = [];
+// Check if $conn is defined to prevent Fatal Error
+if (!isset($conn)) {
+    die("Database connection variable '$conn' not found. Check db_config.php");
+}
+
+$query = "SELECT * FROM uploads WHERE status = 'active' ORDER BY id DESC";
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Query Failed: " . mysqli_error($conn));
 }
 ?>
 <!DOCTYPE html>
@@ -22,117 +20,31 @@ try {
     <meta charset="UTF-8">
     <title>Browse All | SSALPU</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .file-list {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .file-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 20px 30px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .file-card:hover {
-            border-color: var(--accent);
-            transform: translateX(5px);
-        }
-
-        .file-info h4 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: var(--text-white);
-        }
-
-        .file-info p {
-            margin: 5px 0 0;
-            font-size: 0.85rem;
-            color: var(--text-gray);
-        }
-
-        .category-badge {
-            font-size: 0.7rem;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent);
-            padding: 4px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: inline-block;
-        }
-
-        .download-btn {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 10px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
-
-        .download-btn:hover {
-            background: var(--accent);
-            color: #050a14;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 50px;
-            color: var(--text-gray);
-        }
-    </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">SSALPU</div>
-        <nav class="nav-menu">
-            <a href="dashboard.php" class="nav-item">Home</a>
-            <a href="explore.php" class="nav-item">Search Files</a>
-            <a href="browse.php" class="nav-item active">Browse All</a>
-            <a href="upload.php" class="nav-item">Upload Files</a>
-            <a href="logout.php" class="nav-item logout">Logout</a>
-        </nav>
-    </div>
-
+    <?php include 'sidebar_component.php'; ?>
     <div class="content">
         <div class="page-header">
             <h1>Browse <span>All Files</span></h1>
             <p>View the latest study materials shared by the community.</p>
         </div>
-
-        <div class="file-list">
-            <?php if (!empty($recent_files)): ?>
-                <?php foreach ($recent_files as $file): ?>
-                    <div class="file-card">
-                        <div class="file-info">
-                            <span class="category-badge"><?php echo htmlspecialchars($file['category']); ?></span>
-                            <h4><?php echo htmlspecialchars($file['title']); ?></h4>
-                            <p>
-                                <i class="fa-regular fa-user"></i> <?php echo htmlspecialchars($file['full_name']); ?> • 
-                                <i class="fa-regular fa-calendar"></i> <?php echo date('d M Y', strtotime($file['upload_date'])); ?>
-                            </p>
+        
+        <div class="results-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+            <?php if (mysqli_num_rows($result) > 0): ?>
+                <?php while($row = mysqli_fetch_assoc($result)): ?>
+                    <div class="card">
+                        <div class="tag-group">
+                            <span class="tag tag-major"><?php echo htmlspecialchars($row['major']); ?></span>
+                            <span class="tag tag-sem">Sem <?php echo htmlspecialchars($row['semester']); ?></span>
                         </div>
-                        <a href="<?php echo htmlspecialchars($file['file_path']); ?>" class="download-btn" download>
-                            <i class="fa-solid fa-download"></i> DOWNLOAD
-                        </a>
+                        <h3 style="margin: 10px 0;"><?php echo htmlspecialchars($row['title']); ?></h3>
+                        <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px;">Added by User ID: <?php echo $row['user_id']; ?></p>
+                        <a href="download.php?file_id=<?php echo $row['id']; ?>" class="primary-btn">Get File</a>
                     </div>
-                <?php endforeach; ?>
+                <?php endwhile; ?>
             <?php else: ?>
-                <div class="card empty-state">
-                    <i class="fa-solid fa-folder-open" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+                    <i class="fa-solid fa-folder-open" style="font-size: 3rem; color: var(--text-gray); margin-bottom: 15px;"></i>
                     <p>No files have been uploaded yet. Be the first to share!</p>
                 </div>
             <?php endif; ?>
