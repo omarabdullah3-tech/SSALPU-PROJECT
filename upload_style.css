@@ -1,0 +1,70 @@
+
+/* Modern Upload Box Styling */
+.upload-container {
+    margin-top: 20px;
+    position: relative;
+}
+
+#file-upload {
+    display: none;
+}
+
+.attractive-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: rgba(16, 185, 129, 0.03);
+    border: 2px dashed rgba(16, 185, 129, 0.3);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effects */
+.attractive-label:hover {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: #10b981;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+}
+
+.attractive-label:active {
+    transform: scale(0.98);
+}
+
+/* Icon Animation */
+.upload-icon {
+    font-size: 2.5rem;
+    color: #10b981;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.attractive-label:hover .upload-icon {
+    transform: translateY(-5px);
+    filter: drop-shadow(0 0 8px #10b981);
+}
+
+/* Text Styling */
+.primary-text {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.secondary-text {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-top: 8px;
+}
+
+/* Selected State Styles */
+.attractive-label.selected {
+    border-style: solid;
+    background: rgba(16, 185, 129, 0.15);
+}

@@ -1,0 +1,146 @@
+/* explore_style.css - Premium Hub with Dropdown Fix */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg: #050a14;
+    --accent: #10b981;
+    --accent-glow: rgba(16, 185, 129, 0.4);
+    --glass: rgba(15, 23, 42, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at 50% 0%, #0d1e1c 0%, #050a14 100%);
+    color: white;
+    margin: 0;
+    min-height: 100vh;
+}
+
+nav {
+    background: rgba(5, 10, 20, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 8%;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-links a { color: #94a3b8; text-decoration: none; margin-left: 30px; transition: 0.3s; }
+.nav-links a:hover, .active-link { color: var(--accent); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* THE PILL HUB WITH VISIBILITY FIX */
+.filter-hub {
+    max-width: 900px;
+    margin: 60px auto;
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 60px;
+    padding: 10px 10px 10px 35px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    overflow: visible !important; /* CRITICAL: Allows dropdown to pop out */
+}
+
+.filter-hub input {
+    flex: 2;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.filter-hub select {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid var(--glass-border);
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Outfit';
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    /* Custom Arrow SVG */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 14px;
+    padding-right: 40px;
+}
+
+/* FIX: Force dropdown options to be visible against dark theme */
+.filter-hub select option {
+    background-color: #0d1e1c; /* Deep dark background */
+    color: white !important;
+    padding: 12px;
+}
+
+.filter-hub button {
+    background: var(--accent);
+    color: #064e3b;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.filter-hub button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Card Grid Styles */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    padding-bottom: 80px;
+}
+
+.resource-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 30px;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+}
+
+.badge { color: var(--accent); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; }
+.file-title { font-size: 1.6rem; font-weight: 700; margin: 15px 0; color: white; }
+.uploader { color: #94a3b8; font-size: 0.85rem; margin-bottom: 25px; }
+
+.action-btn {
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 700;
+    border: 1px solid var(--glass-border);
+    transition: 0.3s;
+}
+
+.action-btn:hover {
+    background: var(--accent);
+    color: #064e3b;
+}

@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS sudaniShare;
+USE sudaniShare;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    major VARCHAR(100) NOT NULL,
+    registration_number VARCHAR(20) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

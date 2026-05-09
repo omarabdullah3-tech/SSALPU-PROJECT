@@ -1,0 +1,170 @@
+/* Dedicated Library & Preview Styles - sudaniShare */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #050a14;
+    --accent: #10b981;
+    --accent-glow: rgba(16, 185, 129, 0.4);
+    --glass: rgba(15, 23, 42, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-dim: #94a3b8;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at 0% 0%, #0d1e1c 0%, #050a14 50%);
+    color: var(--text-primary);
+    margin: 0;
+    min-height: 100vh;
+}
+
+nav {
+    background: rgba(5, 10, 20, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 500;
+}
+
+.nav-links a:hover, .active-link {
+    color: var(--accent) !important;
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+
+/* Fixed Grid System */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Luxury Card Fix */
+.resource-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 25px;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 250px;
+}
+
+.resource-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Header Info */
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.badge {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.file-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 5px 0;
+    color: white;
+}
+
+.uploader {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+}
+
+/* Video Button Styling (The Red Watch Button) */
+.video-btn {
+    background: rgba(255, 68, 68, 0.1);
+    color: #ff4444;
+    padding: 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #ff4444;
+    text-align: center;
+    margin-bottom: 12px;
+    transition: 0.3s;
+}
+
+.video-btn:hover {
+    background: #ff4444;
+    color: white;
+}
+
+/* Action Area Fix (View & Download Side-by-Side) */
+.btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.view-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid var(--glass-border);
+    transition: 0.3s;
+}
+
+.view-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: white; }
+
+.download-btn {
+    background: var(--accent);
+    color: #064e3b;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.download-btn:hover { filter: brightness(1.1); box-shadow: 0 0 15px var(--accent-glow); }
+
+/* Modal */
+.preview-modal {
+    display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); justify-content: center; align-items: center;
+}
+
+.modal-content {
+    width: 90%; height: 85%; background: #0f172a; border-radius: 20px; position: relative; border: 1px solid var(--glass-border);
+}
+
+.close-x { position: absolute; top: 15px; right: 20px; color: white; font-size: 30px; cursor: pointer; }
+iframe { width: 100%; height: 100%; border: none; }

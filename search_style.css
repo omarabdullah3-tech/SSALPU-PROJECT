@@ -1,0 +1,138 @@
+/* search_style.css - Premium Discovery Interface */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #050a14;
+    --accent: #10b981;
+    --accent-glow: rgba(16, 185, 129, 0.4);
+    --glass: rgba(15, 23, 42, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-dim: #94a3b8;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at 50% 0%, #0d1e1c 0%, #050a14 100%);
+    color: var(--text-primary);
+    margin: 0;
+    min-height: 100vh;
+}
+
+nav {
+    background: rgba(5, 10, 20, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 8%;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 30px; font-weight: 500; transition: 0.3s; }
+.nav-links a:hover, .active-link { color: var(--accent) !important; text-shadow: 0 0 10px var(--accent-glow); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Discovery Hub Header */
+.search-header {
+    text-align: center;
+    padding: 80px 20px 40px;
+}
+
+.search-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #ffffff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.search-header p {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* The Modern Pill Filter Bar */
+.filter-hub {
+    max-width: 900px;
+    margin: 20px auto 60px;
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 60px;
+    padding: 10px 10px 10px 35px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.filter-hub input {
+    flex: 2;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.filter-hub select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Outfit';
+    outline: none;
+}
+
+.filter-hub button {
+    background: var(--accent);
+    color: #064e3b;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filter-hub button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px var(--accent-glow);
+}
+
+/* Result Cards Layout */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    padding-bottom: 50px;
+}
+
+.resource-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 25px;
+    transition: 0.4s;
+}
+
+.resource-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.card-top { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.badge { background: rgba(16, 185, 129, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; }
+.file-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; color: white; }
+.uploader { color: var(--text-dim); font-size: 0.9rem; }
+.uploader a { color: var(--accent); text-decoration: none; font-weight: 600; }

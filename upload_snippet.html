@@ -1,0 +1,26 @@
+
+<div class="upload-container">
+    <label for="file-upload" class="attractive-label" id="drop-zone">
+        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+        <span class="primary-text" id="main-text">SELECT MATERIAL</span>
+        <span class="secondary-text" id="sub-text">PDF, PPTX, or Images (Max 25MB)</span>
+    </label>
+    <input id="file-upload" type="file" name="file" onchange="handleFileSelected(this)">
+</div>
+
+<script>
+function handleFileSelected(input) {
+    const label = document.getElementById('drop-zone');
+    const mainText = document.getElementById('main-text');
+    const subText = document.getElementById('sub-text');
+    
+    if (input.files.length > 0) {
+        const fileName = input.files[0].name;
+        label.classList.add('selected');
+        mainText.innerText = "READY TO SHARE";
+        subText.innerText = "Selected: " + fileName;
+        subText.style.color = "#10b981";
+        subText.style.fontWeight = "700";
+    }
+}
+</script>
